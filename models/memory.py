@@ -1,14 +1,38 @@
 """
-
-Aqui é basicamente uma memória simples para armazenar o personagem na sessão sem precisar utilizar banco de dados (na execução do personagem)
-
+Sistema de memória global compartilhada - todos os usuários veem as mesmas informações
 """
 
+# Variáveis globais compartilhadas (APENAS DADOS DOS PERSONAGENS)
+_shared_data = {
+    'personagens': [],
+    'lista_iniciativa': [],
+    'rodada_atual': 0
+}
+
 class Memory:
-    def __init__(self):
-        self.personagens = [] #na main, precisamos declarar isso como variável global para poder acessar e modificar os players e fazer o escudo do mestre
-        self.lista_iniciativa = []
-        self.rodada_atual = 0
+    @property
+    def personagens(self):
+        return _shared_data['personagens']
+    
+    @personagens.setter
+    def personagens(self, value):
+        _shared_data['personagens'] = value
+    
+    @property
+    def lista_iniciativa(self):
+        return _shared_data['lista_iniciativa']
+    
+    @lista_iniciativa.setter
+    def lista_iniciativa(self, value):
+        _shared_data['lista_iniciativa'] = value
+    
+    @property
+    def rodada_atual(self):
+        return _shared_data['rodada_atual']
+    
+    @rodada_atual.setter
+    def rodada_atual(self, value):
+        _shared_data['rodada_atual'] = value
 
     def organizar_init(self):
         # Primeiro: pega todos os personagens da memória
@@ -24,3 +48,6 @@ class Memory:
                 efeito.reduzir_duracao()
             # Remove efeitos com duração 0
             personagem.efeitos = [e for e in personagem.efeitos if e.duracao > 0]
+
+# Funções apenas para dados compartilhados dos personagens
+# Navegação e estados individuais ficam no session_state de cada usuário

@@ -44,9 +44,6 @@ def pagina_iniciativa(memory):
                 memory.organizar_init()
                 st.rerun()
 
-    
-
-
     # parte de organizar iniciativas
     st.markdown("---")
     with st.expander("Definir Iniciativas"):
@@ -77,7 +74,7 @@ def pagina_iniciativa(memory):
                             max_value=50,
                             value=valor_atual,
                             step=1,
-                            key=f"init_{i}"
+                            key=f"init_{personagem.nome}_{i}"
                         )
                         iniciativas_temp[personagem.nome] = iniciativa
             

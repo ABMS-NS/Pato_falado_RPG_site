@@ -4,13 +4,14 @@ from paginas.criar_personagem import criar_personagem
 from paginas.stats_persona.CRIS import pagina_de_ficha
 from paginas.iniciativa import pagina_iniciativa
 
+# Initialize memory (global, compartilhado apenas para dados dos personagens)
+memory = Memory()
 
-# Initialize memory and session state
-if "memory" not in st.session_state:
-    st.session_state.memory = Memory()
+# Initialize session state para navegação individual
 if "current_page" not in st.session_state:
     st.session_state.current_page = "home"
-
+if "personagem_selecionado" not in st.session_state:
+    st.session_state.personagem_selecionado = None
 
 def main_page():
     st.title("Bem-vindo ao Gerenciador de Personagens")
@@ -35,37 +36,37 @@ def view_characters_page():
     st.title("Personagens Existentes")
     st.markdown("---")
 
-    if not st.session_state.memory.personagens:
+    if not memory.personagens:
         st.info("Nenhum personagem foi criado ainda.")
     else:
-        for personagem in st.session_state.memory.personagens:
+        for i, personagem in enumerate(memory.personagens):
             col1, col2, col3= st.columns([0.3, 1, 1])
             with col1:
-                st.image(personagem.imagem,width=100)
+                st.image(personagem.imagem, width=100)
                 
             with col2:
                 st.subheader(personagem.nome)
             with col3:
-                if st.button(f"Ver Ficha de {personagem.nome}"):
-                    st.session_state.personagem = personagem
+                if st.button(f"Ver Ficha de {personagem.nome}", key=f"btn_{personagem.nome}_{i}"):
+                    st.session_state.personagem_selecionado = personagem
                     st.session_state.current_page = "ficha"
                     st.rerun()
-            # You can add more details here if needed
 
     if st.button("Voltar para a Home"):
         st.session_state.current_page = "home"
         st.rerun()
 
-# Page routing logic
-if st.session_state.current_page == "home":
+# Page routing logic baseado no session_state individual
+current_page = st.session_state.current_page
+
+if current_page == "home":
     main_page()
-elif st.session_state.current_page == "criar":
-    # Pass the memory object to the character creation function
-    criar_personagem(st.session_state.memory)
-elif st.session_state.current_page == "ver":
+elif current_page == "criar":
+    criar_personagem(memory)
+elif current_page == "ver":
     view_characters_page()
-elif st.session_state.current_page == "ficha":
-    if "personagem" in st.session_state:
-        pagina_de_ficha(st.session_state.personagem)
-elif st.session_state.current_page == "iniciativa":
-    pagina_iniciativa(st.session_state.memory)
+elif current_page == "ficha":
+    if st.session_state.personagem_selecionado:
+        pagina_de_ficha(st.session_state.personagem_selecionado)
+elif current_page == "iniciativa":
+    pagina_iniciativa(memory)
