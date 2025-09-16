@@ -71,7 +71,6 @@ def pagina_iniciativa(memory):
                         iniciativa = st.number_input(
                             "Iniciativa",
                             min_value=0,
-                            max_value=50,
                             value=valor_atual,
                             step=1,
                             key=f"init_{personagem.nome}_{i}"
