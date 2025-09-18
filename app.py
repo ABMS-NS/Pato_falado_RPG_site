@@ -76,10 +76,8 @@ def main_page():
     # Dashboard de estatísticas
     st.markdown("## Status")
     
-    col1 = st.columns(1)
     
-    with col1:
-        st.metric(
+    st.metric(
             label="Personagens Criados", 
             value=len(memory.personagens),
             help="Total de personagens criados na sessão atual"
