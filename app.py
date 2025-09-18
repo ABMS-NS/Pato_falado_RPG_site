@@ -18,7 +18,7 @@ def main_page():
     # Seção de boas-vindas com emoji e descrição
     st.markdown("""
     <div style="text-align: center; padding: 20px 0;">
-        <h2>Bem-vindo!</h2>
+        <h2>PATO RPG INICIATIVA</h2>
         <p style="font-size: 18px; color: #666;">
             Feito por Alison
         </p>
@@ -82,20 +82,13 @@ def main_page():
             value=len(memory.personagens),
             help="Total de personagens criados na sessão atual"
         )
-
-
     # Rodapé com dicas
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("---")
     
     st.markdown("""
     <div style="text-align: center; padding: 20px 0; color: #666;">
-        <h4>Dicas Rápidas</h4>
-        <p>
-            • <strong>Personagens:</strong> Crie fichas detalhadas com todas as informações necessárias<br>
-            • <strong>Iniciativa:</strong> Mantenha o combate organizado e dinâmico<br>
-            • <strong>Organização:</strong> Use as fichas para acompanhar a evolução dos seus heróis
-        </p>
+        <h4>Feito por Alison (github: ABMS-NS)</h4>
     </div>
     """, unsafe_allow_html=True)
 
