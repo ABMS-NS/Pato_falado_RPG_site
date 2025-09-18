@@ -82,28 +82,17 @@ def main_page():
     # Dashboard de estatísticas
     st.markdown("## 📊 Status do seu Grupo")
     
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2 = st.columns(2)
     
     with col1:
         st.metric(
             label="🎭 Personagens Criados", 
             value=len(memory.personagens),
-            help="Total de personagens no seu grupo"
+            help="Total de personagens criados na sessão atual"
         )
     
-    with col2:
-        # Contar personagens por nível (assumindo que existe um atributo level)
-        if memory.personagens:
-            nivel_medio = sum(getattr(p, 'level', 1) for p in memory.personagens) / len(memory.personagens)
-            st.metric(
-                label="⭐ Nível Médio", 
-                value=f"{nivel_medio:.1f}",
-                help="Nível médio do grupo"
-            )
-        else:
-            st.metric(label="⭐ Nível Médio", value="0")
     
-    with col3:
+    with col2:
         # Contar classes diferentes (assumindo que existe um atributo classe)
         if memory.personagens:
             classes = set(getattr(p, 'classe', 'Indefinida') for p in memory.personagens)
@@ -114,13 +103,6 @@ def main_page():
             )
         else:
             st.metric(label="🏛️ Classes Diferentes", value="0")
-    
-    with col4:
-        st.metric(
-            label="🎲 Sessões Ativas", 
-            value="1",
-            help="Sessões de jogo em andamento"
-        )
     
     # Rodapé com dicas
     st.markdown("<br><br>", unsafe_allow_html=True)
