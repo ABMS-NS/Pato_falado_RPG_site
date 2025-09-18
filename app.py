@@ -20,7 +20,6 @@ def main_page():
     <div style="text-align: center; padding: 20px 0;">
         <h2>PATO RPG INICIATIVA</h2>
         <p style="font-size: 18px; color: #666;">
-            Feito por Alison
         </p>
     </div>
     """, unsafe_allow_html=True)
