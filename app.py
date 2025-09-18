@@ -15,8 +15,6 @@ if "personagem_selecionado" not in st.session_state:
 
 def main_page():
     
-    st.markdown("---")
-    
     # Seção de boas-vindas com emoji e descrição
     st.markdown("""
     <div style="text-align: center; padding: 20px 0;">
@@ -78,7 +76,7 @@ def main_page():
     # Dashboard de estatísticas
     st.markdown("## Status")
     
-    col1, col2 = st.columns(2)
+    col1 = st.columns(1)
     
     with col1:
         st.metric(
@@ -86,20 +84,8 @@ def main_page():
             value=len(memory.personagens),
             help="Total de personagens criados na sessão atual"
         )
-    
-    
-    with col2:
-        # Contar classes diferentes (assumindo que existe um atributo classe)
-        if memory.personagens:
-            classes = set(getattr(p, 'classe', 'Indefinida') for p in memory.personagens)
-            st.metric(
-                label="Classes Diferentes", 
-                value=len(classes),
-                help="Variedade de classes no grupo"
-            )
-        else:
-            st.metric(label="Classes Diferentes", value="0")
-    
+
+
     # Rodapé com dicas
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("---")
