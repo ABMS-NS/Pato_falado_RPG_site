@@ -33,22 +33,56 @@ def pagina_iniciativa(memory):
                 
                 with col_efeitos:
                     if personagem.efeitos:
-                        efeitos_texto = "\n".join([f"• {efeito.nome} ({efeito.duracao}t)" for efeito in personagem.efeitos])
-                        st.text_area(
-                            "Efeitos:",
-                            value=efeitos_texto,
-                            height=80,
-                            disabled=True,
-                            key=f"efeitos_{personagem.nome}_{i}_rodada_{memory.rodada_atual}"
-                        )
+                        # Cria o texto dos efeitos para o tooltip
+                        efeitos_tooltip = "\\n".join([f"• {efeito.nome} ({efeito.duracao} turnos)" for efeito in personagem.efeitos])
+                        
+                        # HTML com CSS para criar o ícone com tooltip
+                        tooltip_html = f"""
+                        <div style="position: relative; display: inline-block;">
+                            <span style="
+                                background-color: #4CAF50; 
+                                color: white; 
+                                border-radius: 50%; 
+                                width: 25px; 
+                                height: 25px; 
+                                display: inline-flex; 
+                                align-items: center; 
+                                justify-content: center; 
+                                font-size: 14px; 
+                                cursor: pointer;
+                                font-weight: bold;
+                            " title="{efeitos_tooltip}">
+                                ⚡
+                            </span>
+                        </div>
+                        """
+                        st.markdown(tooltip_html, unsafe_allow_html=True)
+                        
+                        # Texto pequeno indicando quantidade
+                        st.caption(f"{len(personagem.efeitos)} efeito(s)")
                     else:
-                        st.text_area(
-                            "Efeitos:",
-                            value="Sem efeitos ativos",
-                            height=80,
-                            disabled=True,
-                            key=f"sem_efeitos_{personagem.nome}_{i}_rodada_{memory.rodada_atual}"
-                        )
+                        # Ícone diferente para sem efeitos
+                        sem_efeitos_html = """
+                        <div style="position: relative; display: inline-block;">
+                            <span style="
+                                background-color: #9E9E9E; 
+                                color: white; 
+                                border-radius: 50%; 
+                                width: 25px; 
+                                height: 25px; 
+                                display: inline-flex; 
+                                align-items: center; 
+                                justify-content: center; 
+                                font-size: 14px; 
+                                cursor: pointer;
+                                font-weight: bold;
+                            " title="Nenhum efeito ativo">
+                                ○
+                            </span>
+                        </div>
+                        """
+                        st.markdown(sem_efeitos_html, unsafe_allow_html=True)
+                        st.caption("Sem efeitos")
             
             # Botão para reorganizar
 
