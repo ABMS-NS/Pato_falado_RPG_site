@@ -29,7 +29,7 @@ def main_page():
     # Seção principal com opções em cards mais elaborados
     st.markdown("""
     <div style="text-align: center; padding: 20px 0;">
-        <h3>Seção de Personagens</h3>
+        <h3>SEÇÃO DE PERSONAGENS</h3>
         <p style="font-size: 18px; color: #666;">
         </p>
     </div>
