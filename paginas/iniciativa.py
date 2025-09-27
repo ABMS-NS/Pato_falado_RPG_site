@@ -39,7 +39,7 @@ def pagina_iniciativa(memory):
                             value=efeitos_texto,
                             height=80,
                             disabled=True,
-                            key=f"efeitos_{personagem.nome}_{i}"
+                            key=f"efeitos_{personagem.nome}_{i}_rodada_{memory.rodada_atual}"
                         )
                     else:
                         st.text_area(
@@ -47,7 +47,7 @@ def pagina_iniciativa(memory):
                             value="Sem efeitos ativos",
                             height=80,
                             disabled=True,
-                            key=f"sem_efeitos_{personagem.nome}_{i}"
+                            key=f"sem_efeitos_{personagem.nome}_{i}_rodada_{memory.rodada_atual}"
                         )
             
             # Botão para reorganizar
