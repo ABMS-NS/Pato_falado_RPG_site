@@ -19,7 +19,7 @@ def pagina_iniciativa(memory):
             
         for i, personagem in enumerate(memory.lista_iniciativa):
             with st.container(border=True):
-                col_pos, col_img, col_info, col_efeitos = st.columns([0.1, 0.2, 0.5, 0.2])
+                col_pos, col_img, col_info, col_efeitos = st.columns([0.1, 0.2, 0.4, 0.3])
                     
                 with col_pos:
                     st.markdown(f"**{i+1}º**")
