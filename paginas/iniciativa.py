@@ -19,7 +19,7 @@ def pagina_iniciativa(memory):
             
         for i, personagem in enumerate(memory.lista_iniciativa):
             with st.container(border=True):
-                col_pos, col_img, col_info = st.columns([0.1, 0.2, 0.7])
+                col_pos, col_img, col_info, col_efeitos = st.columns([0.1, 0.2, 0.5, 0.2])
                     
                 with col_pos:
                     st.markdown(f"**{i+1}º**")
@@ -30,6 +30,15 @@ def pagina_iniciativa(memory):
                 with col_info:
                     st.write(f"**{personagem.nome}**")
                     st.write(f"Iniciativa: {personagem.iniciativa}")
+                
+                with col_efeitos:
+                    if personagem.efeitos:
+                        st.write("**Efeitos:**")
+                        for efeito in personagem.efeitos:
+                            st.write(f"• {efeito.nome} ({efeito.duracao}t)", 
+                                   help=f"Efeito: {efeito.nome} - Duração: {efeito.duracao} turnos")
+                    else:
+                        st.write("*Sem efeitos*")
             
             # Botão para reorganizar
 
