@@ -33,8 +33,8 @@ def pagina_iniciativa(memory):
                 
                 with col_efeitos:
                     if personagem.efeitos:
-                        # Cria o texto dos efeitos para o tooltip
-                        efeitos_tooltip = "\\n".join([f"{efeito.nome} ({efeito.duracao} || )" for efeito in personagem.efeitos])
+                        # Cria o texto dos efeitos para o tooltip usando <br> para quebra de linha
+                        efeitos_tooltip = "<br>".join([f"• {efeito.nome} ({efeito.duracao} turnos)" for efeito in personagem.efeitos])
                         
                         # HTML com CSS para criar o ícone com tooltip
                         tooltip_html = f"""
@@ -52,12 +52,14 @@ def pagina_iniciativa(memory):
                                 cursor: pointer;
                                 font-weight: bold;
                             " title="{efeitos_tooltip}">
-                                ⚡
+                                🎯
                             </span>
                         </div>
                         """
                         st.markdown(tooltip_html, unsafe_allow_html=True)
                         
+                        # Texto pequeno indicando quantidade
+                        st.caption(f"{len(personagem.efeitos)} efeito(s)")
                     else:
                         # Ícone diferente para sem efeitos
                         sem_efeitos_html = """
