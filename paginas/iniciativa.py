@@ -33,11 +33,22 @@ def pagina_iniciativa(memory):
                 
                 with col_efeitos:
                     if personagem.efeitos:
-                        st.write("**Efeitos:**")
-                        for efeito in personagem.efeitos:
-                            st.write(f"• {efeito.nome} ({efeito.duracao}t)")
+                        efeitos_texto = "\n".join([f"• {efeito.nome} ({efeito.duracao}t)" for efeito in personagem.efeitos])
+                        st.text_area(
+                            "Efeitos:",
+                            value=efeitos_texto,
+                            height=80,
+                            disabled=True,
+                            key=f"efeitos_{personagem.nome}_{i}"
+                        )
                     else:
-                        st.write("*Sem efeitos*")
+                        st.text_area(
+                            "Efeitos:",
+                            value="Sem efeitos ativos",
+                            height=80,
+                            disabled=True,
+                            key=f"sem_efeitos_{personagem.nome}_{i}"
+                        )
             
             # Botão para reorganizar
 
