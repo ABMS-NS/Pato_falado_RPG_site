@@ -60,7 +60,7 @@ def main_page():
     with col3:
         st.markdown("""
         <div style="text-align: center; padding: 20px; border-radius: 10px; border: 2px solid #e0e0e0; margin: 10px;">
-            <h3>Iniciativa</h3>
+            <h3>Iniciativa de COmbate</h3>
             <p>Gerencie a ordem de combate</p>
         </div>
         """, unsafe_allow_html=True)
