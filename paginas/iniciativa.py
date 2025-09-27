@@ -34,13 +34,12 @@ def pagina_iniciativa(memory):
                 with col_efeitos:
                     if personagem.efeitos:
                         # Cria o texto dos efeitos para o tooltip usando <br> para quebra de linha
-                        efeitos_tooltip = "<br>".join([f"• {efeito.nome} ({efeito.duracao} turnos)" for efeito in personagem.efeitos])
+                        efeitos_tooltip = f"<br>".join([f"• {efeito.nome} ({efeito.duracao} turnos)" for efeito in personagem.efeitos])
                         
                         # HTML com CSS para criar o ícone com tooltip
                         tooltip_html = f"""
                         <div style="position: relative; display: inline-block;">
-                            <span style="
-                                background-color: #4CAF50; 
+                            <span style=" 
                                 color: white; 
                                 border-radius: 50%; 
                                 width: 25px; 
