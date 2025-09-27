@@ -35,8 +35,7 @@ def pagina_iniciativa(memory):
                     if personagem.efeitos:
                         st.write("**Efeitos:**")
                         for efeito in personagem.efeitos:
-                            st.write(f"• {efeito.nome} ({efeito.duracao}t)", 
-                                   help=f"Efeito: {efeito.nome} - Duração: {efeito.duracao} turnos")
+                            st.write(f"• {efeito.nome} ({efeito.duracao}t)")
                     else:
                         st.write("*Sem efeitos*")
             
