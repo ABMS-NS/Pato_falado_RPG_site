@@ -27,7 +27,13 @@ def main_page():
     st.markdown("---")
     
     # Seção principal com opções em cards mais elaborados
-    st.markdown("## O que você gostaria de fazer?")
+    st.markdown("""
+    <div style="text-align: center; padding: 20px 0;">
+        <h3>Seção de Personagens</h3>
+        <p style="font-size: 18px; color: #666;">
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Espaçamento
     st.markdown("<br>", unsafe_allow_html=True)
