@@ -33,48 +33,11 @@ def pagina_iniciativa(memory):
                 
                 with col_efeitos:
                     if personagem.efeitos:
-                        # Cria o texto dos efeitos para o tooltip
-                        efeitos_tooltip = " | ".join([f"{efeito.nome} ({efeito.duracao}t)" for efeito in personagem.efeitos])
-                        
-                        # Badge dinâmico que se adapta ao conteúdo
-                        badge_html = f"""
-                        <div style="
-                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                            color: white;
-                            padding: 4px 8px;
-                            border-radius: 12px;
-                            font-size: 11px;
-                            font-weight: bold;
-                            text-align: center;
-                            cursor: pointer;
-                            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                            transition: all 0.3s ease;
-                            white-space: nowrap;
-                        " 
-                        title="{efeitos_tooltip}"
-                        onmouseover="this.style.transform='scale(1.05)'"
-                        onmouseout="this.style.transform='scale(1)'">
-                            {len(personagem.efeitos)} efeito{"s" if len(personagem.efeitos) > 1 else ""}
-                        </div>
-                        """
-                        st.markdown(badge_html, unsafe_allow_html=True)
+                        # Lista os efeitos de forma simples
+                        for efeito in personagem.efeitos:
+                            st.write(f"{efeito.nome} - ({efeito.duracao})")
                     else:
-                        # Badge para sem efeitos
-                        badge_vazio = """
-                        <div style="
-                            background-color: #e0e0e0;
-                            color: #757575;
-                            padding: 4px 8px;
-                            border-radius: 12px;
-                            font-size: 11px;
-                            font-weight: bold;
-                            text-align: center;
-                            white-space: nowrap;
-                        ">
-                            Limpo
-                        </div>
-                        """
-                        st.markdown(badge_vazio, unsafe_allow_html=True)
+                        st.write("—")
             
             # Botão para reorganizar
 
