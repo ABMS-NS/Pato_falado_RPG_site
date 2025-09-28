@@ -38,7 +38,7 @@ def pagina_de_ficha(p: Personagem):
     col1, col2 = st.columns([5, 7])
 
     with col1:
-        st.image(p.imagem, caption=p.nome, use_container_width=True)
+        st.image(p.imagem, caption=p.nome, use_column_width=True)
         
         # Informações da iniciativa
         if hasattr(p, 'iniciativa'):
