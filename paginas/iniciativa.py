@@ -14,9 +14,6 @@ def pagina_iniciativa(memory):
     # Verifica se há personagens visíveis para o usuário
     personagens_visiveis = []
     for p in memory.personagens:
-        # Jogadores só veem personagens públicos
-        if st.session_state.user_type == "Jogador" and getattr(p, 'privado', False):
-            continue
         personagens_visiveis.append(p)
     
     if not personagens_visiveis:
