@@ -103,8 +103,8 @@ def pagina_iniciativa(memory):
     # Seção para definir iniciativas
     st.markdown("---")
     
-    if st.session_state.user_type == "Mestre":
-        with st.expander("⚙️ Definir Iniciativas", expanded=not memory.lista_iniciativa):
+
+    with st.expander("⚙️ Definir Iniciativas", expanded=not memory.lista_iniciativa):
             st.subheader("Configurar Iniciativa dos Personagens")
             st.caption("Configure a iniciativa de cada personagem para começar o combate")
             
@@ -181,27 +181,6 @@ def pagina_iniciativa(memory):
                 memory.organizar_init()
                 st.success("🎲 Iniciativas roladas aleatoriamente!")
                 st.rerun()
-    
-    else:
-        # Jogadores só podem ver as iniciativas
-        st.info("ℹ️ Apenas o mestre pode definir e controlar a iniciativa.")
-        
-        if personagens_visiveis:
-            with st.expander("👁️ Ver Iniciativas Atuais"):
-                for personagem in personagens_visiveis:
-                    with st.container(border=True):
-                        col_img, col_info = st.columns([0.3, 0.7])
-                        
-                        with col_img:
-                            st.image(personagem.imagem, width=60)
-                        
-                        with col_info:
-                            st.write(f"**{personagem.nome}**")
-                            iniciativa_atual = getattr(personagem, 'iniciativa', 0)
-                            if iniciativa_atual > 0:
-                                st.write(f"Iniciativa: {iniciativa_atual}")
-                            else:
-                                st.write("Iniciativa: Não definida")
     
     # Seção de informações úteis
     st.markdown("---")
