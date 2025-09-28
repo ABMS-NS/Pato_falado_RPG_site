@@ -263,9 +263,8 @@ def view_characters_page():
                 ["Todos", "Apenas Públicos", "Apenas Privados (NPCs)"]
             )
         else:
-            # Jogadores só veem personagens públicos na lista de personagens
             filtro = "Apenas Públicos"
-            st.info("👁️ Jogadores só podem ver personagens públicos aqui. NPCs aparecem apenas na iniciativa.")
+            st.info("👁️ Jogadores só podem ver personagens públicos")
     
     with col2:
         if st.button("🔙 Voltar"):
@@ -280,9 +279,8 @@ def view_characters_page():
     for personagem in memory.personagens:
         eh_privado = getattr(personagem, 'privado', False)
         
-        # Jogadores só veem personagens públicos na lista de personagens
         if st.session_state.user_type == "Jogador" and eh_privado:
-            continue
+            continue  # Jogadores não veem personagens privados
         
         if filtro == "Apenas Públicos" and eh_privado:
             continue
@@ -346,22 +344,16 @@ def alterar_senha_page():
         st.session_state.current_page = "home"
         st.rerun()
 
-def criar_personagem(memory):
-    # Verifica se o usuário está logado
-    if not hasattr(st.session_state, 'user_type') or st.session_state.user_type is None:
-        st.error("❌ Você precisa fazer login primeiro!")
-        if st.button("🔙 Voltar para Login"):
-            st.session_state.current_page = "login"
-            st.rerun()
-        return
-    
-    # Importa e chama a função
-    from paginas.criar_personagem import criar_personagem as criar_func
-    criar_func(memory)
-
+# Page routing logic
 current_page = st.session_state.current_page
 
-if current_page == "ver":
+if current_page == "login":
+    login_page()
+elif current_page == "home":
+    main_page()
+elif current_page == "criar":
+    criar_personagem(memory)
+elif current_page == "ver":
     view_characters_page()
 elif current_page == "ficha":
     if st.session_state.personagem_selecionado:
