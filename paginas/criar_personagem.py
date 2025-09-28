@@ -4,18 +4,6 @@ import io
 
 
 def criar_personagem(memory):
-    # Header com logout
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        st.title("Criação de Personagem")
-    with col2:
-        if st.button("🚪 Logout", type="secondary"):
-            st.session_state.usuario_logado = None
-            st.session_state.current_page = "login"
-            st.rerun()
-    
-    st.markdown("---")
-
     # Número de barras individual por usuário
     if "num_barras" not in st.session_state:
         st.session_state.num_barras = 1
@@ -26,6 +14,8 @@ def criar_personagem(memory):
     def remover_barra():
         if st.session_state.num_barras > 1:
             st.session_state.num_barras -= 1
+    st.title("Criação de Personagem")
+    st.markdown("---")
 
     # Controles para adicionar/remover barras usando estado global
     col1, col2 = st.columns(2)
@@ -75,8 +65,8 @@ def criar_personagem(memory):
             # Cria a URL da imagem a partir dos bytes
             imagem_url = io.BytesIO(imagem_bytes.read())
 
-            # Cria o objeto Personagem com o dono sendo o usuário logado
-            personagem = Personagem(nome, imagem_url, dono=st.session_state.usuario_logado)
+            # Cria o objeto Personagem
+            personagem = Personagem(nome, imagem_url)
             
             # Adiciona as barras de status ao personagem
             for barra in barras_inputs:
