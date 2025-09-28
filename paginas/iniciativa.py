@@ -37,8 +37,8 @@ def pagina_iniciativa(memory):
         
         for i, personagem in enumerate(memory.lista_iniciativa):
             # Filtra personagens privados para jogadores na visualização
-            if st.session_state.user_type == "Jogador" and getattr(personagem, 'privado', False):
-                continue
+            #if st.session_state.user_type == "Jogador" and getattr(personagem, 'privado', False):
+                #continue
                 
             with st.container(border=True):
                 col_pos, col_img, col_info, col_status = st.columns([0.1, 0.2, 0.5, 0.2])
@@ -145,14 +145,12 @@ def pagina_iniciativa(memory):
                                 st.markdown("🌐 **Público**")
                 
                 st.markdown("---")
-                col_btn1, col_btn2, col_btn3 = st.columns(3)
+                col_btn1, col_btn2 = st.columns(2)
                 
                 with col_btn1:
                     aplicar = st.form_submit_button("✅ Aplicar Iniciativas", type="primary")
                 with col_btn2:
                     zerar = st.form_submit_button("🗑️ Zerar Todas")
-                with col_btn3:
-                    rolar = st.form_submit_button("🎲 Rolar Aleatório")
             
             # Processa o formulário
             if aplicar:
@@ -172,16 +170,6 @@ def pagina_iniciativa(memory):
                 st.success("🗑️ Todas as iniciativas foram zeradas!")
                 st.rerun()
             
-            if rolar:
-                import random
-                for personagem in personagens_visiveis:
-                    # Rola iniciativa aleatória entre 1 e 20
-                    personagem.iniciativa = random.randint(1, 20)
-                
-                memory.organizar_init()
-                st.success("🎲 Iniciativas roladas aleatoriamente!")
-                st.rerun()
-    
     # Seção de informações úteis
     st.markdown("---")
     
