@@ -35,6 +35,7 @@ class Memory:
         _shared_data['rodada_atual'] = value
 
     def organizar_init(self):
+        """Organiza a lista de iniciativa do maior para o menor"""
         # Primeiro: pega todos os personagens da memória
         todos_personagens = self.personagens
         # Segundo: filtra quem tem iniciativa > 0
@@ -43,11 +44,26 @@ class Memory:
         self.lista_iniciativa = sorted(personagens_com_iniciativa, key=lambda p: p.iniciativa, reverse=True)
 
     def passar_turno(self):
-        for personagem in self.lista_iniciativa:
-            for efeito in personagem.efeitos:
-                efeito.reduzir_duracao()
-            # Remove efeitos com duração 0
-            personagem.efeitos = [e for e in personagem.efeitos if e.duracao > 0]
+        """Processa os efeitos de todos os personagens e reduz suas durações"""
+        efeitos_removidos = []
+        
+        # Processa efeitos para todos os personagens (não só os da iniciativa)
+        for personagem in self.personagens:
+            if personagem.efeitos:
+                # Reduz duração de cada efeito
+                for efeito in personagem.efeitos:
+                    efeito.reduzir_duracao()
+                
+                # Verifica quais efeitos expiraram
+                efeitos_expirados = [e for e in personagem.efeitos if e.duracao <= 0]
+                if efeitos_expirados:
+                    for efeito in efeitos_expirados:
+                        efeitos_removidos.append(f"{personagem.nome}: {efeito.nome}")
+                
+                # Remove efeitos com duração 0 ou menor
+                personagem.efeitos = [e for e in personagem.efeitos if e.duracao > 0]
+        
+        return efeitos_removidos  # Retorna lista de efeitos que expiraram para feedback
 
 # Funções apenas para dados compartilhados dos personagens
 # Navegação e estados individuais ficam no session_state de cada usuário
